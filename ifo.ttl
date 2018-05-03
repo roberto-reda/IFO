@@ -1,0 +1,1356 @@
+@prefix : <http://purl.org/ifo> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix snomedct: <http://purl.bioontology.org/ontology/SNOMEDCT/> .
+@base <http://purl.org/ifo> .
+
+<http://purl.org/ifo> rdf:type owl:Ontology ;
+                       dc:subject "IoT, Healtcare, Fitness, Ontology, Semantic Web, RDF, Linked Data"@en ;
+                       dc:title "Fitness Tracking Vocabulary for Sematic Web-based IoT devices"@en ;
+                       rdfs:label "IoT Fitness Traking Ontology"@en ;
+                       foaf:mbox "mailto:roberto.reda@unibo.it" ;
+                       dc:creator "Roberto Reda" ;
+                       rdfs:comment """The IoT Fitness Tracking Ontology provides the vocabulary for annotating helathcare and fitness data collected from IoT devices and smartphones.
+
+This ontology allows to describe the relationship between (1) a person, (2) a physical activity, (3) the time frame reference  (4) and body mesuraments."""@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/creator
+dc:creator rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/subject
+dc:subject rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/title
+dc:title rdf:type owl:AnnotationProperty .
+
+
+###  http://xmlns.com/foaf/0.1/mbox
+foaf:mbox rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://purl.org/ifo#hasActivityIntensity
+:hasActivityIntensity rdf:type owl:ObjectProperty ;
+                      rdfs:domain :PhysicalActivity ;
+                      rdfs:range :ActivityIntensity .
+
+
+###  http://purl.org/ifo#hasAmbientTemperature
+:hasAmbientTemperature rdf:type owl:ObjectProperty ;
+                       rdfs:domain :Episode ;
+                       rdfs:range :AmbientTemperature .
+
+
+###  http://purl.org/ifo#hasBiologicalSex
+:hasBiologicalSex rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf owl:topObjectProperty ;
+                  rdfs:domain :Person ;
+                  rdfs:range :BiologicalSex .
+
+
+###  http://purl.org/ifo#hasBodyPosture
+:hasBodyPosture rdf:type owl:ObjectProperty ;
+                rdfs:domain :BodyMeasure ;
+                rdfs:range :BodyPosture .
+
+
+###  http://purl.org/ifo#hasDescriptiveStatistic
+:hasDescriptiveStatistic rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf owl:topObjectProperty ;
+                         rdfs:domain :Measure ;
+                         rdfs:range :Statistics .
+
+
+###  http://purl.org/ifo#hasInputSource
+:hasInputSource rdf:type owl:ObjectProperty ;
+                rdfs:domain :Episode ;
+                rdfs:range :InputSource .
+
+
+###  http://purl.org/ifo#hasMeasure
+:hasMeasure rdf:type owl:ObjectProperty ;
+            rdfs:domain :Episode ;
+            rdfs:range :Measure .
+
+
+###  http://purl.org/ifo#hasSubEpisode
+:hasSubEpisode rdf:type owl:ObjectProperty ;
+               rdfs:domain :Episode ;
+               rdfs:range :Episode .
+
+
+###  http://purl.org/ifo#hasTemporalRealationshipToPhysicalActivity
+:hasTemporalRealationshipToPhysicalActivity rdf:type owl:ObjectProperty ;
+                                            rdfs:subPropertyOf :hasTemporalRelationship ;
+                                            rdfs:domain :Episode ;
+                                            rdfs:range :TemporalRelationshipToPhysicialActivity .
+
+
+###  http://purl.org/ifo#hasTemporalRelationship
+:hasTemporalRelationship rdf:type owl:ObjectProperty .
+
+
+###  http://purl.org/ifo#hasTemporalRelationshipToMeal
+:hasTemporalRelationshipToMeal rdf:type owl:ObjectProperty ;
+                               rdfs:subPropertyOf :hasTemporalRelationship ;
+                               rdfs:domain :Episode ;
+                               rdfs:range :TemporalRelationshipToMeal .
+
+
+###  http://purl.org/ifo#hasTemporalRelationshipToSleep
+:hasTemporalRelationshipToSleep rdf:type owl:ObjectProperty ;
+                                rdfs:subPropertyOf :hasTemporalRelationship ;
+                                rdfs:domain :Episode ;
+                                rdfs:range :TemporalRelationshipToSleep .
+
+
+###  http://purl.org/ifo#hasTimeFrame
+:hasTimeFrame rdf:type owl:ObjectProperty ;
+              rdfs:domain :Episode ;
+              rdfs:range :TimeFrame .
+
+
+###  http://purl.org/ifo#hasUnit
+:hasUnit rdf:type owl:ObjectProperty ;
+         rdfs:domain :Measure ;
+         rdfs:range :Unit .
+
+
+###  http://purl.org/ifo#isRelativeToAPerson
+:isRelativeToAPerson rdf:type owl:ObjectProperty ;
+                     rdfs:domain :Episode ;
+                     rdfs:range :Person .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://purl.org/ifo#endTime
+:endTime rdf:type owl:DatatypeProperty ,
+                  owl:FunctionalProperty ;
+         rdfs:domain :TimeInterval ;
+         rdfs:range xsd:dateTimeStamp .
+
+
+###  http://purl.org/ifo#hasNumericalValue
+:hasNumericalValue rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :Measure ;
+                   rdfs:range xsd:float .
+
+
+###  http://purl.org/ifo#hasText
+:hasText rdf:type owl:DatatypeProperty ;
+         rdfs:range xsd:string .
+
+
+###  http://purl.org/ifo#hasUserNote
+:hasUserNote rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Episode ;
+             rdfs:range xsd:string .
+
+
+###  http://purl.org/ifo#startTime
+:startTime rdf:type owl:DatatypeProperty ,
+                    owl:FunctionalProperty ;
+           rdfs:domain :TimeInterval ;
+           rdfs:range xsd:dateTimeStamp .
+
+
+###  http://purl.org/ifo#symbol
+:symbol rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Unit ;
+        rdfs:range xsd:string .
+
+
+###  http://purl.org/ifo#value
+:value rdf:type owl:DatatypeProperty ;
+       rdfs:range xsd:double .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://purl.org/ifo#Active
+:Active rdf:type owl:Class ;
+        rdfs:subClassOf :TemporalRelationshipToPhysicialActivity .
+
+
+###  http://purl.org/ifo#ActivityIntensity
+:ActivityIntensity rdf:type owl:Class ;
+                   rdfs:isDefinedBy "This class represents the patient's level of aerobic absolute exercise intensity based on the rate of energy expenditure during aerobic (endurance) physical activity."@en ,
+                                    "http://purl.bioontology.org/ontology/LNC/82288-2"@en .
+
+
+###  http://purl.org/ifo#AfterExercise
+:AfterExercise rdf:type owl:Class ;
+               rdfs:subClassOf :TemporalRelationshipToPhysicialActivity .
+
+
+###  http://purl.org/ifo#AfterMeal
+:AfterMeal rdf:type owl:Class ;
+           rdfs:subClassOf :TemporalRelationshipToMeal .
+
+
+###  http://purl.org/ifo#AmbientTemperature
+:AmbientTemperature rdf:type owl:Class ;
+                    rdfs:comment "This class represents the ambient temperature."@en ;
+                    rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/250825003"@en .
+
+
+###  http://purl.org/ifo#Android
+:Android rdf:type owl:Class ;
+         rdfs:subClassOf :Smartphone ;
+         owl:disjointWith :iPhone .
+
+
+###  http://purl.org/ifo#AtRest
+:AtRest rdf:type owl:Class ;
+        rdfs:subClassOf :TemporalRelationshipToPhysicialActivity .
+
+
+###  http://purl.org/ifo#BeforeExercise
+:BeforeExercise rdf:type owl:Class ;
+                rdfs:subClassOf :TemporalRelationshipToPhysicialActivity .
+
+
+###  http://purl.org/ifo#BeforeMeal
+:BeforeMeal rdf:type owl:Class ;
+            rdfs:subClassOf :TemporalRelationshipToMeal .
+
+
+###  http://purl.org/ifo#BeforeSleeping
+:BeforeSleeping rdf:type owl:Class ;
+                rdfs:subClassOf :TemporalRelationshipToSleep .
+
+
+###  http://purl.org/ifo#BiologicalSex
+:BiologicalSex rdf:type owl:Class ;
+               rdfs:comment "This class represents a person's biological sex."@en ;
+               rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/429019009"@en .
+
+
+###  http://purl.org/ifo#BloodGlucose
+:BloodGlucose rdf:type owl:Class ;
+              rdfs:subClassOf :BodyMeasure ;
+              rdfs:comment "This class represents a person's blood glucose level."@en ;
+              rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/365812005"@en .
+
+
+###  http://purl.org/ifo#BloodPressure
+:BloodPressure rdf:type owl:Class ;
+               rdfs:subClassOf :Vitals ;
+               rdfs:comment "This class represents a person's blood pressure."@en ;
+               rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/75367002"@en .
+
+
+###  http://purl.org/ifo#BodyCompositionUnit
+:BodyCompositionUnit rdf:type owl:Class ;
+                     rdfs:subClassOf :Unit ;
+                     rdfs:comment "This class represents a body mass index unit."@en ;
+                     rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/60621009"@en .
+
+
+###  http://purl.org/ifo#BodyFatPercentage
+:BodyFatPercentage rdf:type owl:Class ;
+                   rdfs:subClassOf :BodyMeasure ;
+                   rdfs:comment "This class represents a person's body fat percentage."@en ;
+                   rdfs:isDefinedBy "http://purl.bioontology.org/ontology/LNC/41982-0"@en .
+
+
+###  http://purl.org/ifo#BodyHeight
+:BodyHeight rdf:type owl:Class ;
+            rdfs:subClassOf :BodyMeasure ;
+            rdfs:comment "This class represents a person's body height."@en ;
+            rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/50373000"@en .
+
+
+###  http://purl.org/ifo#BodyMassIndex
+:BodyMassIndex rdf:type owl:Class ;
+               rdfs:subClassOf :BodyMeasure ;
+               rdfs:comment "This class represents a person's body mass index (BMI)."@en ;
+               rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/60621009"@en .
+
+
+###  http://purl.org/ifo#BodyMeasure
+:BodyMeasure rdf:type owl:Class ;
+             rdfs:subClassOf :Episode ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :hasBodyPosture ;
+                               owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass :BodyPosture
+                             ] ;
+             rdfs:comment "This class represent a person's body measurament."@en .
+
+
+###  http://purl.org/ifo#BodyPosture
+:BodyPosture rdf:type owl:Class ;
+             rdfs:comment "This class represents the posture of the subject (for example, during a clinical measurement)."@en ;
+             rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/271605009"@en .
+
+
+###  http://purl.org/ifo#BodyTemperature
+:BodyTemperature rdf:type owl:Class ;
+                 rdfs:subClassOf :Vitals ;
+                 rdfs:comment "This class represents a person's body temperature."@en ;
+                 rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/386725007"@en .
+
+
+###  http://purl.org/ifo#BodyWeight
+:BodyWeight rdf:type owl:Class ;
+            rdfs:subClassOf :BodyMeasure ;
+            rdfs:comment "This class represents a person's body weight."@en ;
+            rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/363808001"@en .
+
+
+###  http://purl.org/ifo#BreathMeditation
+:BreathMeditation rdf:type owl:Class ;
+                  rdfs:subClassOf :Mindfullness ;
+                  owl:disjointWith :SoundMeditation .
+
+
+###  http://purl.org/ifo#CaloriesBurned
+:CaloriesBurned rdf:type owl:Class ;
+                rdfs:subClassOf :BodyMeasure ;
+                rdfs:comment """This schema represents a single measurement of amount of calories burned in kilocalories (kcal).
+The LOINC code represents Calories burned:Power = Energy/Time:Point in time:^Patient:Quantitative, that is, a Quantitative measure of Calories burned by a Patient at a Point in time."""@en ;
+                rdfs:isDefinedBy "http://purl.bioontology.org/ontology/LNC/41981-2"@en .
+
+
+###  http://purl.org/ifo#CaloriesUnit
+:CaloriesUnit rdf:type owl:Class ;
+              rdfs:subClassOf :Unit ;
+              rdfs:comment "This class represents an amount  of kilocalories."@en ;
+              rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/258791007"@en .
+
+
+###  http://purl.org/ifo#CountingUnit
+:CountingUnit rdf:type owl:Class ;
+              rdfs:subClassOf :Unit ;
+              rdfs:comment "The number of elements of a finite set of objects."@en ;
+              rdfs:isDefinedBy "http://semanticscience.org/resource/SIO_000794"@en .
+
+
+###  http://purl.org/ifo#Cycling
+:Cycling rdf:type owl:Class ;
+         rdfs:subClassOf :Sport ;
+         rdfs:comment "This class represents a Cycling activity session."@en ;
+         rdfs:isDefinedBy "http://purl.obolibrary.org/obo/TRAK_0000319"@en .
+
+
+###  http://purl.org/ifo#DeepSleep
+:DeepSleep rdf:type owl:Class ;
+           rdfs:subClassOf :Sleep ;
+           rdfs:comment "This class represents Deep sleep duration."@en ;
+           rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/60984000"@en .
+
+
+###  http://purl.org/ifo#Device
+:Device rdf:type owl:Class ;
+        rdfs:subClassOf :InputSource ;
+        owl:disjointWith :UserTyped ;
+        rdfs:comment "Generic IoT fitness device" ;
+        rdfs:label "Device" .
+
+
+###  http://purl.org/ifo#DiastolicBloodPressure
+:DiastolicBloodPressure rdf:type owl:Class ;
+                        rdfs:subClassOf :BloodPressure ;
+                        owl:disjointWith :SystolicBloodPressure ;
+                        rdfs:comment "This schema represents a person's diastolic blood pressure."@en ;
+                        rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/271650006"@en .
+
+
+###  http://purl.org/ifo#DurationUnit
+:DurationUnit rdf:type owl:Class ;
+              rdfs:subClassOf :Unit ;
+              rdfs:comment "This class represents a duration or length of time. Basic unit is second (s). Allowed values are drawn from the Time Units Common Synonyms (non-UCUM)."@en ;
+              rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/103335007"@en ;
+              rdfs:seeAlso "http://download.hl7.de/documents/ucum/ucumdata.html"@en .
+
+
+###  http://purl.org/ifo#DuringExercise
+:DuringExercise rdf:type owl:Class ;
+                rdfs:subClassOf :TemporalRelationshipToPhysicialActivity .
+
+
+###  http://purl.org/ifo#DuringSleep
+:DuringSleep rdf:type owl:Class ;
+             rdfs:subClassOf :TemporalRelationshipToSleep .
+
+
+###  http://purl.org/ifo#Episode
+:Episode rdf:type owl:Class ;
+         rdfs:subClassOf :Episode ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :hasMeasure ;
+                           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onClass :Measure
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :hasTimeFrame ;
+                           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onClass :TimeFrame
+                         ] ;
+         rdfs:comment "This class represents a single episode of physical activity or a body measurament."@en .
+
+
+###  http://purl.org/ifo#Fasting
+:Fasting rdf:type owl:Class ;
+         rdfs:subClassOf :TemporalRelationshipToMeal .
+
+
+###  http://purl.org/ifo#Female
+:Female rdf:type owl:Class ;
+        rdfs:subClassOf :BiologicalSex ;
+        owl:disjointWith :Male .
+
+
+###  http://purl.org/ifo#FlightsClimbed
+:FlightsClimbed rdf:type owl:Class ;
+                rdfs:subClassOf :Walking ;
+                rdfs:comment "This class represents a Stair Climbing session."@en ;
+                rdfs:isDefinedBy "http://purl.bioontology.org/ontology/MESH/D000072799"@en .
+
+
+###  http://purl.org/ifo#FrequencyUnit
+:FrequencyUnit rdf:type owl:Class ;
+               rdfs:subClassOf :Unit ;
+               rdfs:comment "This class represents a unit of frequency."@en ;
+               rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/259023001"@en .
+
+
+###  http://purl.org/ifo#HeartRate
+:HeartRate rdf:type owl:Class ;
+           rdfs:subClassOf :Vitals ;
+           rdfs:comment "This class represents a person's heart rate."@en ;
+           rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/78564009"@en .
+
+
+###  http://purl.org/ifo#InputSource
+:InputSource rdf:type owl:Class ;
+             rdfs:comment "This class represent a generic IoT data source."@en .
+
+
+###  http://purl.org/ifo#LayingDown
+:LayingDown rdf:type owl:Class ;
+            rdfs:subClassOf :BodyPosture .
+
+
+###  http://purl.org/ifo#LengthUnit
+:LengthUnit rdf:type owl:Class ;
+            rdfs:subClassOf :Unit ;
+            owl:disjointWith :MassUnit ;
+            rdfs:comment """This class represents a length or a distance.
+ Basic unit is meter (m) [ http://unitsofmeasure.org/ucum.html#para-28 ]. Allowed values are drawn from the SI Length Units and English Length Units Common Synonyms (non-UCUM). The valid UCUM code is different for inch ([in_i]), foot ([ft_i]), yard ([yd_i]) and mile ([mi_i])."""@en ;
+            rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/410668003"@en ;
+            rdfs:seeAlso "http://download.hl7.de/documents/ucum/ucumdata.html"@en .
+
+
+###  http://purl.org/ifo#LightActivity
+:LightActivity rdf:type owl:Class ;
+               rdfs:subClassOf :ActivityIntensity .
+
+
+###  http://purl.org/ifo#LightSleep
+:LightSleep rdf:type owl:Class ;
+            rdfs:subClassOf :Sleep ;
+            rdfs:comment "This class represents Light sleep duration."@en ;
+            rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/29373008"@en .
+
+
+###  http://purl.org/ifo#Male
+:Male rdf:type owl:Class ;
+      rdfs:subClassOf :BiologicalSex .
+
+
+###  http://purl.org/ifo#MassConcentrationUnit
+:MassConcentrationUnit rdf:type owl:Class ;
+                       rdfs:subClassOf :Unit ;
+                       rdfs:comment "This class represents a mass concentration."@en ;
+                       rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/415777001"@en .
+
+
+###  http://purl.org/ifo#MassUnit
+:MassUnit rdf:type owl:Class ;
+          rdfs:subClassOf :Unit ;
+          rdfs:comment "The unit of measure of the mass. Basic unit is gram (g) [ http://unitsofmeasure.org/ucum.html#para-28 ]. Allowed values are drawn from the SI Mass Units and English Mass Units Common Synonyms (non-UCUM) columns of the 'Mass Units' section. The valid UCUM code is different for metric ton (t), grain ([gr]), ounce ([oz_av]), pound ([lb_av]) and Ton ([ston_av])."@en ;
+          rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/118538004"@en ;
+          rdfs:seeAlso "http://download.hl7.de/documents/ucum/ucumdata.html"@en .
+
+
+###  http://purl.org/ifo#Measure
+:Measure rdf:type owl:Class ;
+         rdfs:subClassOf [ rdf:type owl:Restriction ;
+                           owl:onProperty :hasDescriptiveStatistic ;
+                           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onClass :Statistics
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :hasUnit ;
+                           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onClass :Unit
+                         ] ;
+         rdfs:comment "This class represent a single measurament composed of a numerical value and optionally a unit."@en .
+
+
+###  http://purl.org/ifo#Meditation
+:Meditation rdf:type owl:Class ;
+            rdfs:subClassOf :Episode ;
+            rdfs:comment "This class represents a Meditation session."@en ;
+            rdfs:isDefinedBy "http://purl.bioontology.org/ontology/MESH/D019122"@en .
+
+
+###  http://purl.org/ifo#Mindfullness
+:Mindfullness rdf:type owl:Class ;
+              rdfs:subClassOf :Meditation ;
+              rdfs:comment """This class represents a session of mindufulness meditation.
+Mindfulness is defined as a moment-to-moment awareness of one's experience without judgment and as a state and not a trait"""@en ;
+              rdfs:isDefinedBy "http://purl.bioontology.org/ontology/MESH/D064866"@en .
+
+
+###  http://purl.org/ifo#ModerateActivity
+:ModerateActivity rdf:type owl:Class ;
+                  rdfs:subClassOf :ActivityIntensity .
+
+
+###  http://purl.org/ifo#NotFasting
+:NotFasting rdf:type owl:Class ;
+            rdfs:subClassOf :TemporalRelationshipToMeal .
+
+
+###  http://purl.org/ifo#OnWaking
+:OnWaking rdf:type owl:Class ;
+          rdfs:subClassOf :TemporalRelationshipToSleep .
+
+
+###  http://purl.org/ifo#OxygenSaturation
+:OxygenSaturation rdf:type owl:Class ;
+                  rdfs:subClassOf :BodyMeasure ;
+                  rdfs:comment "This schema represents the oxygen saturation."@en ;
+                  rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/431314004"@en .
+
+
+###  http://purl.org/ifo#PercentageUnit
+:PercentageUnit rdf:type owl:Class ;
+                rdfs:subClassOf :Unit ;
+                rdfs:isDefinedBy "This class represents a percentage."@en ,
+                                 "http://purl.bioontology.org/ontology/SNOMEDCT/415067009"@en .
+
+
+###  http://purl.org/ifo#PeriodicityUnit
+:PeriodicityUnit rdf:type owl:Class ;
+                 rdfs:subClassOf :FrequencyUnit ;
+                 rdfs:comment "Unit of periodicity."@en ;
+                 rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/282464009"@en .
+
+
+###  http://purl.org/ifo#Person
+:Person rdf:type owl:Class ;
+        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                          owl:onProperty :hasBiologicalSex ;
+                          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onClass :BiologicalSex
+                        ] ;
+        rdfs:isDefinedBy "http://xmlns.com/foaf/spec/#term_Person" ;
+        rdfs:label "Person" ;
+        rdfs:seeAlso "http://dbpedia.org/ontology/Person" .
+
+
+###  http://purl.org/ifo#PhysicalActivity
+:PhysicalActivity rdf:type owl:Class ;
+                  rdfs:subClassOf :Episode ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :hasActivityIntensity ;
+                                    owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                    owl:onClass :ActivityIntensity
+                                  ] ;
+                  rdfs:comment "This class represents an episode of physical activity."@en ;
+                  rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/68130003"@en .
+
+
+###  http://purl.org/ifo#Point
+:Point rdf:type owl:Class ;
+       rdfs:comment "A point described using a coordinate system relative to Earth."@en ;
+       rdfs:isDefinedBy geo:Point .
+
+
+###  http://purl.org/ifo#PressureUnit
+:PressureUnit rdf:type owl:Class ;
+              rdfs:subClassOf :Unit ;
+              rdfs:comment "This class represents a Unit of pressure."@en ;
+              rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/259010008"@en .
+
+
+###  http://purl.org/ifo#RemSleep
+:RemSleep rdf:type owl:Class ;
+          rdfs:subClassOf :Sleep ;
+          rdfs:comment "This class represents Rapid eye movement sleep duration."@en ;
+          rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/89129007"@en .
+
+
+###  http://purl.org/ifo#RespiratoryRate
+:RespiratoryRate rdf:type owl:Class ;
+                 rdfs:subClassOf :Vitals ;
+                 rdfs:comment "This class represents a person's respiratory rate (inhalation and exhalation)."@en ;
+                 rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/86290005"@en .
+
+
+###  http://purl.org/ifo#Running
+:Running rdf:type owl:Class ;
+         rdfs:subClassOf :Sport ;
+         rdfs:comment "This class represents a Running activty session."@en ;
+         rdfs:isDefinedBy "http://purl.bioontology.org/ontology/MESH/D012420"@en .
+
+
+###  http://purl.org/ifo#SinglePointTime
+:SinglePointTime rdf:type owl:Class ;
+                 rdfs:subClassOf :TimeFrame ;
+                 owl:disjointWith :TimeInterval ;
+                 rdfs:comment "This class represents a point in time."@en ;
+                 rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/123029007"@en .
+
+
+###  http://purl.org/ifo#Sitting
+:Sitting rdf:type owl:Class ;
+         rdfs:subClassOf :BodyPosture .
+
+
+###  http://purl.org/ifo#Sleep
+:Sleep rdf:type owl:Class ;
+       rdfs:subClassOf :Episode ;
+       rdfs:comment "This class represents a single measurement of sleep duration."@en ;
+       rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/248263006"@en .
+
+
+###  http://purl.org/ifo#Smartphone
+:Smartphone rdf:type owl:Class ;
+            rdfs:subClassOf :Device ;
+            owl:disjointWith :Wearable .
+
+
+###  http://purl.org/ifo#SoundMeditation
+:SoundMeditation rdf:type owl:Class ;
+                 rdfs:subClassOf :Mindfullness .
+
+
+###  http://purl.org/ifo#Sport
+:Sport rdf:type owl:Class ;
+       rdfs:subClassOf :PhysicalActivity ;
+       rdfs:comment "This class represents a Sport acrtivity."@en ;
+       rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/415577004"@en .
+
+
+###  http://purl.org/ifo#Standing
+:Standing rdf:type owl:Class ;
+          rdfs:subClassOf :BodyPosture .
+
+
+###  http://purl.org/ifo#Statistics
+:Statistics rdf:type owl:Class ;
+            rdfs:comment "This class represents a descriptive statistic of a set of measurements. A measurement value can be the result of combining various measurements and calculating descriptive statistics like average, maximum, minimum, etc. A measurement value without a descriptive statistic is interpreted as being the result of an individual measurement."@en .
+
+
+###  http://purl.org/ifo#Steps
+:Steps rdf:type owl:Class ;
+       rdfs:subClassOf :PhysicalActivity ;
+       rdfs:comment "This class represents a single measurement of number of steps."@en ;
+       rdfs:isDefinedBy "http://purl.bioontology.org/ontology/LNC/55423-8"@en .
+
+
+###  http://purl.org/ifo#Swimming
+:Swimming rdf:type owl:Class ;
+          rdfs:subClassOf :Sport ;
+          rdfs:comment "An activity in which the body is propelled through water by specific movement of the arms and/or the legs. Swimming as propulsion through water by the movement of limbs, tail, or fins of animals is often studied as a form of PHYSICAL EXERTION or endurance."@en ,
+                       "This class represents a Swiming activity session."@en ;
+          rdfs:isDefinedBy "http://purl.bioontology.org/ontology/MESH/D013550"@en .
+
+
+###  http://purl.org/ifo#SystolicBloodPressure
+:SystolicBloodPressure rdf:type owl:Class ;
+                       rdfs:subClassOf :BloodPressure ;
+                       rdfs:comment "This schema represents a person's systolic blood pressure."@en ;
+                       rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/271649006"@en .
+
+
+###  http://purl.org/ifo#TemperatureUnit
+:TemperatureUnit rdf:type owl:Class ;
+                 rdfs:subClassOf :Unit ;
+                 rdfs:comment "This class represents  temperature (intensity of heat)."@en ;
+                 rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/703421000"@en .
+
+
+###  http://purl.org/ifo#TemporalRelationship
+:TemporalRelationship rdf:type owl:Class .
+
+
+###  http://purl.org/ifo#TemporalRelationshipToMeal
+:TemporalRelationshipToMeal rdf:type owl:Class ;
+                            rdfs:subClassOf :TemporalRelationship ;
+                            rdfs:comment "This class represents the temporal relationship of a clinical measure or assessment to meals."@en .
+
+
+###  http://purl.org/ifo#TemporalRelationshipToPhysicialActivity
+:TemporalRelationshipToPhysicialActivity rdf:type owl:Class ;
+                                         rdfs:subClassOf :TemporalRelationship ;
+                                         rdfs:comment "This class represents the temporal relationship of a clinical measure or assessment to physical activity."@en .
+
+
+###  http://purl.org/ifo#TemporalRelationshipToSleep
+:TemporalRelationshipToSleep rdf:type owl:Class ;
+                             rdfs:subClassOf :TemporalRelationship ;
+                             rdfs:comment "This class represents the temporal relationship of a clinical measure or assessment to sleep."@en .
+
+
+###  http://purl.org/ifo#TimeFrame
+:TimeFrame rdf:type owl:Class ;
+           rdfs:comment "This class describes a time frame as a point in time or a time interval."@en .
+
+
+###  http://purl.org/ifo#TimeInterval
+:TimeInterval rdf:type owl:Class ;
+              rdfs:subClassOf :TimeFrame ;
+              rdfs:comment "This schema describes an interval of time."@en ;
+              rdfs:isDefinedBy "https://ncim.nci.nih.gov/ncimbrowser/ConceptReport.jsp?dictionary=NCI%20MetaThesaurus&code=C0872291"@en .
+
+
+###  http://purl.org/ifo#Treadmill
+:Treadmill rdf:type owl:Class ;
+           rdfs:subClassOf :Sport ;
+           rdfs:comment "This class represents a treadmill activity session."@en .
+
+
+###  http://purl.org/ifo#Unit
+:Unit rdf:type owl:Class ;
+      rdfs:comment "The unit of measure of the element. Allowed values are drawn from the Common synonyms (non-UCUM) column of [subset of] UCUM, SI and English units."@en ;
+      rdfs:seeAlso "http://download.hl7.de/documents/ucum/ucumdata.html"@en .
+
+
+###  http://purl.org/ifo#UserTyped
+:UserTyped rdf:type owl:Class ;
+           rdfs:subClassOf :InputSource ;
+           rdfs:comment "User directly inserted value."@en .
+
+
+###  http://purl.org/ifo#VigorousActivity
+:VigorousActivity rdf:type owl:Class ;
+                  rdfs:subClassOf :ActivityIntensity .
+
+
+###  http://purl.org/ifo#Vitals
+:Vitals rdf:type owl:Class ;
+        rdfs:subClassOf :BodyMeasure ;
+        rdfs:comment "This class represent a person's vital sign."@en ;
+        rdfs:isDefinedBy "http://purl.bioontology.org/ontology/LNC/8716-3"@en .
+
+
+###  http://purl.org/ifo#Wake
+:Wake rdf:type owl:Class ;
+      rdfs:subClassOf :Sleep ;
+      rdfs:isDefinedBy "http://mimi.case.edu/ontologies/2009/1/SDO.owl#WakeFunction"@en .
+
+
+###  http://purl.org/ifo#Walking
+:Walking rdf:type owl:Class ;
+         rdfs:subClassOf :Sport ;
+         rdfs:comment "An activity in which the body advances at a slow to moderate pace by moving the feet in a coordinated fashion. This includes recreational walking, walking for fitness, and competitive race-walking."@en ,
+                      "This class represent a Walking activity session."@en ;
+         rdfs:isDefinedBy "http://purl.bioontology.org/ontology/MESH/D016138"@en .
+
+
+###  http://purl.org/ifo#Wearable
+:Wearable rdf:type owl:Class ;
+          rdfs:subClassOf :Device .
+
+
+###  http://purl.org/ifo#average
+:average rdf:type owl:Class ;
+         rdfs:subClassOf :Statistics .
+
+
+###  http://purl.org/ifo#count
+:count rdf:type owl:Class ;
+       rdfs:subClassOf :Statistics .
+
+
+###  http://purl.org/ifo#iPhone
+:iPhone rdf:type owl:Class ;
+        rdfs:subClassOf :Smartphone .
+
+
+###  http://purl.org/ifo#maximum
+:maximum rdf:type owl:Class ;
+         rdfs:subClassOf :Statistics .
+
+
+###  http://purl.org/ifo#minimum
+:minimum rdf:type owl:Class ;
+         rdfs:subClassOf :Statistics .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://purl.org/ifo#Active
+:Active rdf:type owl:NamedIndividual ,
+                 :Active .
+
+
+###  http://purl.org/ifo#AfterExercise
+:AfterExercise rdf:type owl:NamedIndividual ,
+                        :AfterExercise .
+
+
+###  http://purl.org/ifo#AfterMeal
+:AfterMeal rdf:type owl:NamedIndividual ,
+                    :AfterMeal .
+
+
+###  http://purl.org/ifo#AtRest
+:AtRest rdf:type owl:NamedIndividual ,
+                 :AtRest .
+
+
+###  http://purl.org/ifo#BeforeExercise
+:BeforeExercise rdf:type owl:NamedIndividual ,
+                         :BeforeExercise .
+
+
+###  http://purl.org/ifo#BeforeMeal
+:BeforeMeal rdf:type owl:NamedIndividual ,
+                     :BeforeMeal .
+
+
+###  http://purl.org/ifo#BeforeSleeping
+:BeforeSleeping rdf:type owl:NamedIndividual ,
+                         :BeforeSleeping .
+
+
+###  http://purl.org/ifo#C
+:C rdf:type owl:NamedIndividual ,
+            :TemperatureUnit ;
+   rdfs:comment "Degrees Celsius"@en ;
+   rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/258710007"@en .
+
+
+###  http://purl.org/ifo#DuringExercise
+:DuringExercise rdf:type owl:NamedIndividual ,
+                         :DuringExercise .
+
+
+###  http://purl.org/ifo#DuringSleep
+:DuringSleep rdf:type owl:NamedIndividual ,
+                      :DuringSleep .
+
+
+###  http://purl.org/ifo#F
+:F rdf:type owl:NamedIndividual ,
+            :TemperatureUnit ;
+   rdfs:comment "Degrees Fahrenheit"@en ;
+   rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/258712004"@en .
+
+
+###  http://purl.org/ifo#Fasting
+:Fasting rdf:type owl:NamedIndividual ,
+                  :Fasting .
+
+
+###  http://purl.org/ifo#Female
+:Female rdf:type owl:NamedIndividual ,
+                 :Female .
+
+
+###  http://purl.org/ifo#K
+:K rdf:type owl:NamedIndividual ,
+            :TemperatureUnit ;
+   rdfs:comment "Degrees Kelvin"@en ;
+   rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/258713009" .
+
+
+###  http://purl.org/ifo#LayingDown
+:LayingDown rdf:type owl:NamedIndividual ,
+                     :LayingDown .
+
+
+###  http://purl.org/ifo#LightActivity
+:LightActivity rdf:type owl:NamedIndividual ,
+                        :LightActivity .
+
+
+###  http://purl.org/ifo#Male
+:Male rdf:type owl:NamedIndividual ,
+               :Male .
+
+
+###  http://purl.org/ifo#ModerateActivity
+:ModerateActivity rdf:type owl:NamedIndividual ,
+                           :ModerateActivity .
+
+
+###  http://purl.org/ifo#NotFasting
+:NotFasting rdf:type owl:NamedIndividual ,
+                     :NotFasting .
+
+
+###  http://purl.org/ifo#OnWaking
+:OnWaking rdf:type owl:NamedIndividual ,
+                   :OnWaking .
+
+
+###  http://purl.org/ifo#Sitting
+:Sitting rdf:type owl:NamedIndividual ,
+                  :Sitting .
+
+
+###  http://purl.org/ifo#Standing
+:Standing rdf:type owl:NamedIndividual ,
+                   :Standing .
+
+
+###  http://purl.org/ifo#VigorousActivity
+:VigorousActivity rdf:type owl:NamedIndividual ,
+                           :VigorousActivity .
+
+
+###  http://purl.org/ifo#average
+:average rdf:type owl:NamedIndividual ,
+                  :average .
+
+
+###  http://purl.org/ifo#bpm
+:bpm rdf:type owl:NamedIndividual ,
+              :PeriodicityUnit ;
+     rdfs:comment "The number of heartbeats measured per minute time." ;
+     rdfs:isDefinedBy "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C49673"@en .
+
+
+###  http://purl.org/ifo#cm
+:cm rdf:type owl:NamedIndividual ,
+             :LengthUnit ;
+    rdfs:comment "Centimeter unit."@en ;
+    rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/258672001"@en .
+
+
+###  http://purl.org/ifo#count
+:count rdf:type owl:NamedIndividual ,
+                :CountingUnit .
+
+
+###  http://purl.org/ifo#countStatistic
+:countStatistic rdf:type owl:NamedIndividual ,
+                         :count .
+
+
+###  http://purl.org/ifo#ft
+:ft rdf:type owl:NamedIndividual ,
+             :LengthUnit ;
+    rdfs:comment "Foot unit."@en ;
+    rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/259051005"@en .
+
+
+###  http://purl.org/ifo#hour
+:hour rdf:type owl:NamedIndividual ,
+               :DurationUnit ;
+      rdfs:comment "Hour."@en ;
+      rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/258702006"@en .
+
+
+###  http://purl.org/ifo#in
+:in rdf:type owl:NamedIndividual ,
+             :LengthUnit ;
+    rdfs:comment "Inch unit."@en ;
+    rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/258677007"@en .
+
+
+###  http://purl.org/ifo#kcal
+:kcal rdf:type owl:NamedIndividual ,
+               :CaloriesUnit ;
+      rdfs:comment "Kilocalorie unit."@en ;
+      rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/258791007"@en .
+
+
+###  http://purl.org/ifo#kg
+:kg rdf:type owl:NamedIndividual ,
+             :MassUnit ;
+    rdfs:comment "Kilogram unit."@en ;
+    rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/258683005"@en .
+
+
+###  http://purl.org/ifo#km
+:km rdf:type owl:NamedIndividual ,
+             :LengthUnit ;
+    rdfs:comment "Kilometer unit."@en ;
+    rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/258670009"@en .
+
+
+###  http://purl.org/ifo#lb
+:lb rdf:type owl:NamedIndividual ,
+             :MassUnit ;
+    rdfs:comment "Pounds unit."@en ;
+    rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/258693003"@en .
+
+
+###  http://purl.org/ifo#m
+:m rdf:type owl:NamedIndividual ,
+            :LengthUnit ;
+   rdfs:comment "Meter unit."@en ;
+   rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/258669008"@en .
+
+
+###  http://purl.org/ifo#maximum
+:maximum rdf:type owl:NamedIndividual ,
+                  :maximum .
+
+
+###  http://purl.org/ifo#miles
+:miles rdf:type owl:NamedIndividual ,
+                :LengthUnit ;
+       rdfs:comment "Mile unit."@en ;
+       rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/258678002"@en .
+
+
+###  http://purl.org/ifo#min
+:min rdf:type owl:NamedIndividual ,
+              :DurationUnit ;
+     rdfs:comment "Minute."@en ;
+     rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/258701004"@en .
+
+
+###  http://purl.org/ifo#minimum
+:minimum rdf:type owl:NamedIndividual ,
+                  :minimum .
+
+
+###  http://purl.org/ifo#mmHg
+:mmHg rdf:type owl:NamedIndividual ,
+               :PressureUnit ;
+      rdfs:comment "Millimeter of mercury"@en ;
+      rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/259018001"@en .
+
+
+###  http://purl.org/ifo#percentage
+:percentage rdf:type owl:NamedIndividual ,
+                     :PercentageUnit ;
+            rdfs:comment "Percent of total"@en ;
+            rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/258755000"@en .
+
+
+###  http://purl.org/ifo#s
+:s rdf:type owl:NamedIndividual ,
+            :DurationUnit ;
+   rdfs:comment "Second unit."@en ;
+   rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/257997001"@en .
+
+
+###  http://purl.org/ifo#breaths/min
+<http://purl.org/ifo#breaths/min> rdf:type owl:NamedIndividual ,
+                                           :PeriodicityUnit ;
+                                  rdfs:comment "Breaths per minute."@en ;
+                                  rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/258984001"@en .
+
+
+###  http://purl.org/ifo#count/min
+<http://purl.org/ifo#count/min> rdf:type owl:NamedIndividual ,
+                                         :PeriodicityUnit ;
+                                rdfs:comment "Times/minute."@en .
+
+
+###  http://purl.org/ifo#kg/m2
+<http://purl.org/ifo#kg/m2> rdf:type owl:NamedIndividual ,
+                                     :BodyCompositionUnit ;
+                            rdfs:comment "Weight for height"@en ;
+                            rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/248358009"@en .
+
+
+###  http://purl.org/ifo#mg/dL
+<http://purl.org/ifo#mg/dL> rdf:type owl:NamedIndividual ,
+                                     :MassConcentrationUnit ;
+                            rdfs:comment "Milligram/deciliter"@en ;
+                            rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/258797006"@en .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+:Active rdfs:comment "The SNOMED code represents Active"@en ;
+        rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/55561003"@en .
+
+
+:AfterExercise rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/255214003"@en ;
+               rdfs:comment "The SNOMED code represents After exercise."@en .
+
+
+:AfterMeal rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/24863003"@en ;
+           rdfs:comment "The SNOMED code represents After meal."@en .
+
+
+:AtRest rdfs:comment "The SNOMED code represents at rest."@en ;
+        rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/263678003"@en .
+
+
+:BeforeExercise rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/307166007"@en ;
+                rdfs:comment "The SNOMED code represents Before exercise."@en .
+
+
+:BeforeMeal rdfs:comment "The SNOMED code represents Before meal."@en ;
+            rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/307165006"@en .
+
+
+:BeforeSleeping rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/307155000"@en ;
+                rdfs:comment "The SNOMED code represents Before sleeping."@en .
+
+
+:DuringExercise rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/309604004"@en ;
+                rdfs:comment "The SNOMED code represents During exercise."@en .
+
+
+:DuringSleep rdfs:comment "The SNOMED code represents During sleep."@en ;
+             rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/309610004"@en .
+
+
+:Fasting rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/16985007"@en ;
+         rdfs:comment "The SNOMED code represents Fasting."@en .
+
+
+:Female rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/248152002"@en ;
+        rdfs:comment "This class represents a person of female sex."@en .
+
+
+:LayingDown rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/102538003"@en ;
+            rdfs:comment "This class represents the laying position of the subject."@en .
+
+
+:LightActivity rdfs:isDefinedBy "http://purl.bioontology.org/ontology/LNC/LA20164-2"@en ;
+               rdfs:comment "This class represent a light exercise intensity."@en .
+
+
+:Male rdfs:comment "This class represents a person of male sex."@en ;
+      rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/248153007"@en .
+
+
+:ModerateActivity rdfs:isDefinedBy "http://purl.bioontology.org/ontology/LNC/LA20165-9"@en ;
+                  rdfs:comment "This class represent a moderate exercise intensity."@en .
+
+
+:NotFasting rdfs:comment "The SNOMED code represents Not fasting."@en ;
+            rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/440565004"@en .
+
+
+:OnWaking rdfs:comment "The SNOMED code represents On waking."@en ;
+          rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/307156004"@en .
+
+
+:Sitting rdfs:comment "This class represents the sitting position of the subject."@en ;
+         rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/33586001"@en .
+
+
+:Standing rdfs:isDefinedBy "http://purl.bioontology.org/ontology/SNOMEDCT/10904000"@en ;
+          rdfs:comment "This class represents the standing position of the subject."@en .
+
+
+:VigorousActivity rdfs:isDefinedBy "This class represent a vigorous exercise intensity."@en ,
+                                   "http://purl.bioontology.org/ontology/LNC/LA20166-7"@en .
+
+
+:average rdfs:isDefinedBy "https://ncim.nci.nih.gov/ncimbrowser/ConceptReport.jsp?dictionary=NCI%20MetaThesaurus&code=C1510992"@en ;
+         rdfs:comment "NCIt Definition: A statistical calculation describing the central tendency of a set of numbers; used to interpret quantitative data."@en .
+
+
+:count rdfs:comment "NPO Definition: A dimensionless unit which denotes a simple count of things. (NCI)"@en ;
+       rdfs:isDefinedBy "https://ncim.nci.nih.gov/ncimbrowser/ConceptReport.jsp?dictionary=NCI%20MetaThesaurus&code=C0750480"@en .
+
+
+:maximum rdfs:comment "NCIt Definition: The largest possible quantity or degree."@en ;
+         rdfs:isDefinedBy "https://ncim.nci.nih.gov/ncimbrowser/ConceptReport.jsp?dictionary=NCI%20MetaThesaurus&code=C0806909"@en .
+
+
+:minimum rdfs:comment "NCIt Definition: The smallest possible quantity."@en ;
+         rdfs:isDefinedBy "https://ncim.nci.nih.gov/ncimbrowser/ConceptReport.jsp?dictionary=NCI%20MetaThesaurus&code=C1524031"@en .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Active
+                :AfterExercise
+                :AtRest
+                :BeforeExercise
+                :DuringExercise
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :ActivityIntensity
+                :AmbientTemperature
+                :BiologicalSex
+                :BodyPosture
+                :Episode
+                :InputSource
+                :Measure
+                :Person
+                :Point
+                :Statistics
+                :TemporalRelationship
+                :TimeFrame
+                :Unit
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :AfterMeal
+                :BeforeMeal
+                :Fasting
+                :NotFasting
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :BeforeSleeping
+                :DuringSleep
+                :OnWaking
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :BloodGlucose
+                :BodyFatPercentage
+                :BodyHeight
+                :BodyMassIndex
+                :BodyWeight
+                :CaloriesBurned
+                :OxygenSaturation
+                :Vitals
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :BloodPressure
+                :BodyTemperature
+                :HeartRate
+                :RespiratoryRate
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :BodyMeasure
+                :Meditation
+                :PhysicalActivity
+                :Sleep
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :CaloriesUnit
+                :CountingUnit
+                :DurationUnit
+                :FrequencyUnit
+                :LengthUnit
+                :MassConcentrationUnit
+                :MassUnit
+                :PressureUnit
+                :TemperatureUnit
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :CaloriesUnit
+                :DurationUnit
+                :FrequencyUnit
+                :LengthUnit
+                :MassUnit
+                :PressureUnit
+                :TemperatureUnit
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Cycling
+                :Running
+                :Swimming
+                :Treadmill
+                :Walking
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :DeepSleep
+                :LightSleep
+                :RemSleep
+                :Wake
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :FlightsClimbed
+                :Sport
+                :Steps
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :LayingDown
+                :Sitting
+                :Standing
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :LightActivity
+                :ModerateActivity
+                :VigorousActivity
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :TemporalRelationshipToMeal
+                :TemporalRelationshipToPhysicialActivity
+                :TemporalRelationshipToSleep
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :average
+                :count
+                :maximum
+                :minimum
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi
