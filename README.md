@@ -1,0 +1,2 @@
+# IFO
+IoT Fitness Ontology
